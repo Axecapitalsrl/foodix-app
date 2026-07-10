@@ -1,0 +1,306 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Política de Privacidad — Foodix</title>
+<meta name="description" content="Política de Privacidad de Foodix. Cómo recopilamos, usamos y protegemos tus datos personales en Bolivia.">
+<meta name="theme-color" content="#262626">
+<link rel="icon" type="image/png" href="assets/foodix-logo.png">
+<style>
+  :root{
+    --red:#E41E1B;--red-deep:#B0110F;--gold:#F2B11E;
+    --brand-dark:#262626;--brand-line:rgba(255,255,255,.12);
+    --paper:#FFFFFF;--surface:#FFFFFF;--ink:#1B1A1C;--ink-soft:#403D44;
+    --muted:#7C747E;--line:#E7E0E2;--wash:#F6F3F3;
+    --sans:"Helvetica Neue",Arial,system-ui,sans-serif;
+  }
+  @media (prefers-color-scheme:dark){
+    :root{--paper:#0E0D10;--surface:#1A181D;--ink:#EFECF0;--ink-soft:#C7C0CB;
+      --muted:#948C98;--line:#2B2731;--wash:#161418}
+  }
+  :root[data-theme="light"]{--paper:#FFFFFF;--surface:#FFFFFF;--ink:#1B1A1C;--ink-soft:#403D44;
+    --muted:#7C747E;--line:#E7E0E2;--wash:#F6F3F3}
+  :root[data-theme="dark"]{--paper:#0E0D10;--surface:#1A181D;--ink:#EFECF0;--ink-soft:#C7C0CB;
+    --muted:#948C98;--line:#2B2731;--wash:#161418}
+
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);
+    line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  a{color:var(--red);text-decoration:none}
+  a:hover{text-decoration:underline}
+
+  header.top{position:sticky;top:0;z-index:20;background:var(--brand-dark);
+    border-bottom:1px solid var(--brand-line)}
+  .bar{max-width:920px;margin:0 auto;padding:0 24px;height:66px;display:flex;
+    align-items:center;justify-content:space-between;gap:16px}
+  .brand img{display:block;height:32px;width:auto}
+  .back{color:#fff;font-size:14px;font-weight:700;border:1px solid rgba(255,255,255,.18);
+    border-radius:999px;padding:9px 16px;background:rgba(255,255,255,.05)}
+  .back:hover{background:rgba(255,255,255,.12);text-decoration:none}
+
+  .hero{background:var(--brand-dark);color:#fff;border-bottom:3px solid var(--red)}
+  .hero .in{max-width:920px;margin:0 auto;padding:40px 24px 46px}
+  .hero .kicker{text-transform:uppercase;letter-spacing:.16em;font-size:12px;font-weight:800;color:var(--gold)}
+  .hero h1{font-style:italic;font-weight:900;letter-spacing:-1px;font-size:clamp(30px,5vw,46px);
+    margin:10px 0 8px;transform:skewX(-3deg)}
+  .hero p{margin:0;color:rgba(255,255,255,.72);font-size:15px}
+
+  main{max-width:920px;margin:0 auto;padding:36px 24px 60px}
+  .note{background:var(--wash);border:1px solid var(--line);border-left:4px solid var(--gold);
+    border-radius:12px;padding:16px 18px;font-size:14px;color:var(--ink-soft);margin:0 0 34px}
+  .note b{color:var(--ink)}
+
+  .toc{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px 22px;margin:0 0 40px}
+  .toc h2{font-size:13px;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin:0 0 12px}
+  .toc ol{margin:0;padding-left:20px;columns:2;column-gap:28px;font-size:14px}
+  .toc li{margin-bottom:7px;break-inside:avoid}
+  @media (max-width:620px){.toc ol{columns:1}}
+
+  section.art{margin-bottom:34px;scroll-margin-top:80px}
+  section.art h2{font-size:clamp(19px,3vw,24px);font-weight:800;letter-spacing:-.3px;
+    margin:0 0 6px;color:var(--ink);display:flex;gap:10px;align-items:baseline}
+  section.art h2 .n{color:var(--red);font-style:italic;font-weight:900}
+  section.art h2::after{content:"";display:block}
+  section.art h3{font-size:16px;font-weight:800;margin:20px 0 4px}
+  section.art p{margin:8px 0;color:var(--ink-soft)}
+  section.art ul{margin:8px 0;padding-left:22px;color:var(--ink-soft)}
+  section.art li{margin:5px 0}
+  .lead-rule{height:3px;width:46px;background:var(--red);border-radius:3px;margin:2px 0 14px}
+  mark.ph{background:rgba(242,177,30,.22);color:inherit;border-bottom:1px dashed var(--gold);
+    padding:0 3px;border-radius:3px;font-weight:600}
+
+  table.data{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px;
+    display:block;overflow-x:auto}
+  table.data th,table.data td{border:1px solid var(--line);padding:10px 12px;text-align:left;vertical-align:top}
+  table.data th{background:var(--wash);font-weight:800;color:var(--ink);white-space:nowrap}
+  table.data td{color:var(--ink-soft)}
+
+  footer{background:var(--brand-dark);color:rgba(255,255,255,.6);border-top:1px solid var(--brand-line)}
+  footer .in{max-width:920px;margin:0 auto;padding:26px 24px;display:flex;justify-content:space-between;
+    gap:14px;flex-wrap:wrap;font-size:13px}
+  footer a{color:rgba(255,255,255,.8)}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="bar">
+    <a class="brand" href="index.html" aria-label="Foodix inicio"><img src="assets/foodix-logo.png" alt="Foodix"></a>
+    <a class="back" href="index.html">← Volver al inicio</a>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="in">
+    <div class="kicker">Legales</div>
+    <h1>Política de Privacidad</h1>
+    <p>Última actualización: 10 de julio de 2026 · Estado Plurinacional de Bolivia</p>
+  </div>
+</section>
+
+<main>
+  <div class="note">
+    <b>Documento en revisión.</b> Versión inicial de la Política de Privacidad de Foodix (AXE CAP S.R.L., NIT 672975027).
+    Restan por confirmar los campos <mark class="ph">resaltados</mark> —dominio web definitivo, correo oficial de privacidad y
+    país de los servidores— y se recomienda una revisión por asesoría legal antes de la publicación definitiva.
+  </div>
+
+  <nav class="toc">
+    <h2>Contenido</h2>
+    <ol>
+      <li><a href="#antecedentes">Antecedentes preliminares</a></li>
+      <li><a href="#principios">Principios que orientan la Política</a></li>
+      <li><a href="#informacion">Información que Foodix recopila y su uso</a></li>
+      <li><a href="#pago">Pago online</a></li>
+      <li><a href="#actualizacion">Actualización de la información</a></li>
+      <li><a href="#compartir">Con quién compartimos sus datos</a></li>
+      <li><a href="#paises">A qué países transferimos sus datos</a></li>
+      <li><a href="#derechos">Sus derechos</a></li>
+      <li><a href="#cookies">Información sobre cookies</a></li>
+      <li><a href="#seguridad">Seguridad de su información</a></li>
+      <li><a href="#cambios">Cambios en esta Política</a></li>
+      <li><a href="#ninos">Uso del sitio por parte de niños</a></li>
+      <li><a href="#finales">Disposiciones finales</a></li>
+      <li><a href="#jurisdiccion">Jurisdicción y ley aplicable</a></li>
+      <li><a href="#consentimiento">Consentimiento</a></li>
+    </ol>
+  </nav>
+
+  <section class="art" id="antecedentes">
+    <h2><span class="n">1.</span> Antecedentes preliminares</h2>
+    <div class="lead-rule"></div>
+    <p>Al utilizar Foodix, usted, como usuario, nos confía su información. Mediante la presente política de privacidad (en adelante, la “Política”), informamos a nuestros usuarios cómo tratamos su información personal.</p>
+    <p>Si nuestra página web (<mark class="ph">www.foodix.com.bo</mark>) o nuestra aplicación “Foodix” para dispositivos móviles (en adelante, el “Portal”) contiene enlaces que conducen a la página web de otro proveedor, nuestra Política no se aplica a la página web a la que se le remite.</p>
+    <p>Esta Política aplica a todos los usuarios de nuestro Portal.</p>
+    <p>Con su consentimiento a la siguiente Política, usted autoriza a Foodix —marca operada por <b>AXE CAP S.R.L.</b>, NIT <b>672975027</b> (“Foodix”)— y da su conformidad a la recopilación, procesamiento, uso y tratamiento de sus datos personales por nuestra parte, de conformidad con la normativa vigente en Bolivia.</p>
+    <p>Los usuarios garantizan y responden, en cualquier caso, sobre la veracidad, exactitud, vigencia y autenticidad de la información personal facilitada, y se comprometen a mantenerla debidamente actualizada.</p>
+    <p>Por favor, tómese el tiempo suficiente para leer esta Política detenidamente. Si usted tiene cualquier pregunta sobre esta Política o el tratamiento que le damos a sus datos personales, por favor escríbanos un correo a <mark class="ph">privacidad@foodix.com.bo</mark>.</p>
+  </section>
+
+  <section class="art" id="principios">
+    <h2><span class="n">2.</span> Principios que orientan la Política</h2>
+    <div class="lead-rule"></div>
+    <p>Foodix y sus sociedades afiliadas por vínculos de subordinación o control, en Bolivia o en una jurisdicción o territorio diferente (en adelante, las “Sociedades Vinculadas”), en el tratamiento de la información de sus usuarios respeta y respetará sus derechos, aplicando y garantizando los siguientes principios:</p>
+    <h3>Legalidad</h3>
+    <p>En el tratamiento de la información se dará aplicación a las disposiciones vigentes y aplicables que rigen la materia y demás derechos fundamentales conexos, incluyendo las disposiciones contractuales pactadas con los usuarios.</p>
+    <h3>Libertad</h3>
+    <p>El tratamiento de datos personales sólo se llevará a cabo con el consentimiento previo, expreso e informado del usuario. Los datos personales que no tengan el carácter de públicos no podrán ser obtenidos ni divulgados sin previa autorización, o en ausencia de mandato legal, estatutario o judicial que releve el consentimiento.</p>
+    <h3>Finalidad</h3>
+    <p>El tratamiento de la información que no tenga el carácter de dato público estará subordinado y atenderá una finalidad legítima, la cual será informada al respectivo usuario.</p>
+    <h3>Veracidad o calidad</h3>
+    <p>La información sujeta a tratamiento debe ser veraz, completa, exacta, actualizada, comprobable y comprensible. Foodix no será responsable frente al titular cuando se traten datos parciales, incompletos, fraccionados o que induzcan a error, entregados por el usuario sin que existiera forma de verificar su veracidad o calidad, o cuando el propio usuario los hubiera entregado o divulgado garantizando su veracidad.</p>
+    <h3>Transparencia</h3>
+    <p>Se garantizará el derecho del usuario a obtener de Foodix, en cualquier momento y sin restricciones, información acerca de la existencia de cualquier dato suyo que sea de su interés o titularidad.</p>
+    <h3>Acceso y circulación restringida</h3>
+    <p>La información protegida no estará disponible en Internet u otros medios de divulgación masiva, salvo que el acceso sea técnicamente controlable para brindar un conocimiento restringido sólo a Foodix, las Sociedades Vinculadas, los usuarios o terceros debidamente autorizados.</p>
+    <h3>Seguridad</h3>
+    <p>La información protegida será objeto de protección en la medida en que los recursos técnicos y estándares mínimos lo permitan, mediante medidas tecnológicas, protocolos y medidas administrativas necesarias para evitar su adulteración, modificación, pérdida, consulta o cualquier uso o acceso no autorizado.</p>
+    <h3>Confidencialidad</h3>
+    <p>Todas las personas que en Foodix administran, manejan, actualizan o tienen acceso a información protegida que no tenga carácter público se comprometen a conservarla de manera estrictamente confidencial y a no revelarla a terceros, salvo autorización.</p>
+  </section>
+
+  <section class="art" id="informacion">
+    <h2><span class="n">3.</span> Información que Foodix recopila y su uso</h2>
+    <div class="lead-rule"></div>
+    <p>El responsable de la base de datos es Foodix (AXE CAP S.R.L., NIT 672975027), con domicilio fiscal en Av. San Martín S/N, Edificio Manzana 40, Torre 2, Piso 10, Oficina 9, Santa Cruz de la Sierra, Bolivia. Los datos de carácter personal proporcionados a través del Portal, así como los que pudiera facilitar en el futuro, pueden ser transmitidos a servidores ubicados en <mark class="ph">Estados Unidos</mark> para su conservación bajo condiciones de seguridad.</p>
+
+    <h3>Datos que recolectamos cuando visita el Portal sin registrarse</h3>
+    <table class="data">
+      <tr><th>Categoría</th><th>Explicación</th></tr>
+      <tr><td>Información del dispositivo</td><td>Identificación del dispositivo, sistema operativo y/u otros identificadores, hardware.</td></tr>
+      <tr><td>Información de conexión</td><td>Hora, fecha, duración de uso del sitio y origen.</td></tr>
+    </table>
+
+    <h3>Si inicia sesión</h3>
+    <table class="data">
+      <tr><th>Categoría</th><th>Explicación</th></tr>
+      <tr><td>Información de acceso</td><td>Nombre de usuario, contraseña.</td></tr>
+      <tr><td>Información de comunicación</td><td>Comentarios, puntuaciones, devoluciones y comunicaciones generales.</td></tr>
+      <tr><td>Otros datos</td><td>Datos que usted nos provea voluntariamente al usar el Portal, o de otras fuentes como redes sociales o bases de datos públicas.</td></tr>
+    </table>
+
+    <h3>Datos que recogemos al registrarse y realizar pedidos</h3>
+    <p>Los campos necesarios para gestionar pedidos están marcados como obligatorios; sin ellos no podemos procesar su pedido. El resto es opcional y nos ayuda a mejorar el servicio. La información básica es:</p>
+    <table class="data">
+      <tr><th>Categoría</th><th>Explicación</th></tr>
+      <tr><td>Información de cuenta</td><td>Nombre completo, domicilio, fecha de nacimiento, teléfono, email, información de pago (incluida la verificación de pago vinculada), documento de identidad, número de socio en programas de promociones y foto de perfil.</td></tr>
+      <tr><td>Ubicación</td><td>Si otorga permiso, recopilamos su ubicación precisa o aproximada mediante GPS, dirección IP y wifi, cuando la app funciona en primer plano y/o en segundo plano según los permisos de su dispositivo.</td></tr>
+      <tr><td>Información de acceso</td><td>Email y contraseña.</td></tr>
+      <tr><td>Dispositivo y conexión</td><td>Identificadores del dispositivo, sistema operativo, hardware; hora, fecha, duración y origen de uso.</td></tr>
+      <tr><td>Comunicación</td><td>Comentarios, puntuaciones, devoluciones y comunicaciones generales.</td></tr>
+      <tr><td>Historial de pedidos</td><td>Tipo de servicio y de pedido, detalle, información de entrega, fecha y hora, precio y forma de pago.</td></tr>
+      <tr><td>Otra información</td><td>La que el usuario provea voluntariamente o provenga de otras fuentes como redes sociales, aplicaciones conectadas o bases de datos públicas.</td></tr>
+    </table>
+    <p>Toda información que usted nos provea se considera información personal suya. Si nos provee datos de otra persona, Foodix no será responsable de obtener el consentimiento previo de esa persona, siendo usted el único responsable del tratamiento de datos de terceros.</p>
+
+    <h3>Uso de los datos personales</h3>
+    <p>Sólo recolectamos sus datos cuando es necesario y con una finalidad lícita y previamente definida, entre ellas:</p>
+    <ul>
+      <li><b>Prestación de servicios:</b> administrar el Portal; crear y actualizar su cuenta; verificar su perfil; personalizar y mejorar su experiencia; habilitar los servicios disponibles; procesar y cobrar los pedidos; controlar la ruta del pedido para verificar su entrega; y permitir comentarios y valoraciones de los comercios adheridos.</li>
+      <li><b>Atención al cliente:</b> almacenamos la comunicación que usted nos envía para responder con mayor rapidez y mejorar el servicio.</li>
+      <li><b>Protección y seguridad:</b> mantener la integridad de nuestros servicios y prevenir fraudes.</li>
+      <li><b>Investigación y desarrollo:</b> probar, analizar y desarrollar productos y nuevas funciones.</li>
+      <li><b>Publicidad:</b> enviarle correos, SMS, notificaciones push o llamadas para ofrecerle cupones, descuentos, promociones y encuestas. Usted puede oponerse a este tratamiento en cada comunicación o desde los ajustes del Portal.</li>
+      <li><b>Marketing:</b> seleccionar ofertas acordes a sus intereses; concursos, sorteos y entrega de premios; y contenidos de nuestros socios comerciales o comercios adheridos.</li>
+      <li><b>Procedimientos judiciales o requerimientos administrativos:</b> cuando sea requerido por orden judicial o autoridad competente.</li>
+    </ul>
+  </section>
+
+  <section class="art" id="pago">
+    <h2><span class="n">4.</span> Pago online</h2>
+    <div class="lead-rule"></div>
+    <p>Puede realizar el pago de sus pedidos de forma online. Nos aseguramos de que todos los proveedores con posible acceso a sus datos actúen de manera confidencial y cumpliendo la normativa aplicable sobre protección de datos, formalizando con ellos acuerdos específicos de transmisión de datos con condiciones adecuadas de seguridad.</p>
+    <p>Para ejecutar y procesar los pagos recurrimos a proveedores financieros, quienes recopilan la información de su tarjeta de crédito o débito. El pago se realiza directamente al proveedor financiero, de quien dependerá su autorización.</p>
+    <p>Para procesar los pagos recopilamos: (i) su código postal; (ii) su número de teléfono móvil; (iii) detalles de su historial de transacciones; (iv) información bancaria (emisor de la tarjeta y si es de débito o crédito); (v) el correo electrónico del usuario que realiza el pedido; y (vi) la dirección de entrega.</p>
+  </section>
+
+  <section class="art" id="actualizacion">
+    <h2><span class="n">5.</span> Actualización de la información</h2>
+    <div class="lead-rule"></div>
+    <p>Si su información cambia, usted es responsable de modificarla en el Portal para su correcto funcionamiento. Si actualiza o modifica sus datos, Foodix podrá conservar la información anterior por motivos de seguridad y control de fraude.</p>
+  </section>
+
+  <section class="art" id="compartir">
+    <h2><span class="n">6.</span> Con quién compartimos sus datos personales</h2>
+    <div class="lead-rule"></div>
+    <p>Cuando Foodix utilice, transmita o transfiera internacionalmente datos personales, garantizará el cumplimiento de los principios de la Sección 2 y de la normativa aplicable. El usuario reconoce que, de presentarse una venta, fusión, consolidación, cambio de control societario, transferencia sustancial de activos, reorganización o liquidación de Foodix, la información podrá ser transferida o asignada a una o más partes relevantes, incluidas Sociedades Vinculadas.</p>
+    <h3>Terceros que pueden acceder a los datos</h3>
+    <ul>
+      <li><b>Empresas vinculadas a Foodix</b>, para facilitar y mejorar el procesamiento de datos sobre los servicios.</li>
+      <li><b>Comercios adheridos</b>, con quienes compartimos los datos estrictamente necesarios para concretar los pedidos.</li>
+      <li><b>Proveedores de servicios y socios comerciales</b>, tales como: procesadores y facilitadores de pagos; proveedores de almacenamiento en la nube; socios y plataformas de marketing; proveedores de análisis de datos; proveedores de investigación; proveedores que ayudan a mejorar la seguridad de las apps; y consultores u otros proveedores de servicios profesionales.</li>
+      <li><b>Otros</b>, sólo cuando se lo notifiquemos y usted lo acepte expresamente.</li>
+    </ul>
+  </section>
+
+  <section class="art" id="paises">
+    <h2><span class="n">7.</span> A qué países transferimos sus datos</h2>
+    <div class="lead-rule"></div>
+    <p>Procesamos sus datos principalmente dentro de Bolivia. Sin embargo, algunos de nuestros proveedores de servicios tienen su sede en <mark class="ph">Estados Unidos</mark> u otros países, por lo que ciertos datos pueden ser tratados en dichas jurisdicciones bajo condiciones de seguridad y confidencialidad.</p>
+  </section>
+
+  <section class="art" id="derechos">
+    <h2><span class="n">8.</span> Sus derechos</h2>
+    <div class="lead-rule"></div>
+    <p>Foodix es la responsable de la base de datos y la entidad ante la cual podrán ejercerse sus derechos, acreditando debidamente su identidad o representación. Usted puede solicitar gratuitamente el acceso, la rectificación, actualización, inclusión, cancelación y cualquier otra acción relativa a su información personal, así como oponerse a su tratamiento.</p>
+    <p>Foodix retiene la información y el perfil del usuario mientras usted mantenga su cuenta activa. Para gestionar o eliminar sus datos personales, contáctenos a <mark class="ph">privacidad@foodix.com.bo</mark>.</p>
+    <p>Una vez solicitada la eliminación, Foodix procederá con la solicitud o informará las razones por las que estime que no corresponde, en el plazo previsto por la normativa y, en su defecto, en un plazo de 10 días hábiles. Finalizado el procedimiento, Foodix no conservará registro de sus datos personales, salvo los registros de pedidos con fines de prevención de fraude y estadísticos, sin asociarlos a ninguna cuenta.</p>
+  </section>
+
+  <section class="art" id="cookies">
+    <h2><span class="n">9.</span> Información sobre cookies</h2>
+    <div class="lead-rule"></div>
+    <p>Una cookie es información que un servidor web envía a un navegador y que este almacena, reenviándola al servidor cada vez que solicita una página. Utilizamos cookies de sesión y cookies persistentes únicamente en nuestro sitio web.</p>
+    <p>Las cookies de sesión nos permiten reconocerlo mientras utiliza el Portal y se eliminan al cerrar el navegador. Las cookies persistentes permiten reconocerlo en visitas futuras y se mantienen hasta que usted las elimine o hasta su fecha de expiración.</p>
+    <p>Podemos utilizar herramientas de analítica (por ejemplo, Google Analytics) para analizar el uso del sitio mediante cookies que generan información estadística almacenada por el proveedor. La mayoría de los navegadores permiten rechazar las cookies desde su configuración, aunque esto puede afectar la usabilidad de varios sitios web, incluido este.</p>
+  </section>
+
+  <section class="art" id="seguridad">
+    <h2><span class="n">10.</span> Seguridad de su información personal y servidores</h2>
+    <div class="lead-rule"></div>
+    <p>Toda la información recabada en el Portal será tratada conforme a la normativa y utilizada únicamente para los fines consentidos. Foodix emplea diversas tecnologías y procedimientos de seguridad para proteger su información contra accesos, usos, modificaciones o divulgaciones no autorizados.</p>
+    <p>No obstante, la transmisión de datos por Internet es inherentemente insegura y no podemos garantizar por completo la seguridad de los datos enviados por este medio. Le recomendamos no incluir información confidencial o sensible en comunicaciones como correos electrónicos. Usted es responsable de mantener la confidencialidad de su contraseña y datos de usuario.</p>
+  </section>
+
+  <section class="art" id="cambios">
+    <h2><span class="n">11.</span> Cambios en esta Política</h2>
+    <div class="lead-rule"></div>
+    <p>Foodix se reserva el derecho de mantener actualizada esta Política conforme a la normativa vigente. Si se realizan cambios materiales, se lo informaremos mediante una comunicación electrónica y, de ser necesario, se le solicitará nuevamente su consentimiento. Le recomendamos consultar esta Política con frecuencia.</p>
+  </section>
+
+  <section class="art" id="ninos">
+    <h2><span class="n">12.</span> Uso de este sitio por parte de niños</h2>
+    <div class="lead-rule"></div>
+    <p>Este sitio no está dirigido a niños y nos interesa proteger su privacidad, por lo que no deseamos recopilar información que identifique a menores de edad. Si un menor nos hubiera suministrado información personal, sus padres o tutores deben contactarnos. En caso de tomar conocimiento de que se han proporcionado datos de un menor de 18 años, los eliminaremos a la brevedad posible.</p>
+  </section>
+
+  <section class="art" id="finales">
+    <h2><span class="n">13.</span> Disposiciones finales</h2>
+    <div class="lead-rule"></div>
+    <p>El Portal puede contener enlaces a otros sitios web fuera de nuestro control, a los que no aplica esta Política. Le recomendamos leer las políticas y términos de los sitios que visite. Ninguna parte de esta Política supone la creación de derechos o reclamos adicionales a los que correspondan por ley, ni impone obligaciones adicionales a Foodix, sus directores, empleados, agentes o representantes.</p>
+  </section>
+
+  <section class="art" id="jurisdiccion">
+    <h2><span class="n">14.</span> Jurisdicción y ley aplicable</h2>
+    <div class="lead-rule"></div>
+    <p>La presente Política se rige, sin excepción y en todos sus términos, por las leyes del Estado Plurinacional de Bolivia y será interpretada de acuerdo a ellas. Cualquier controversia derivada de esta Política —su existencia, validez, interpretación, alcance o cumplimiento— será sometida a los tribunales ordinarios de Justicia con jurisdicción en <mark class="ph">Santa Cruz de la Sierra</mark>, Bolivia, renunciándose expresamente a cualquier otro fuero o jurisdicción.</p>
+  </section>
+
+  <section class="art" id="consentimiento">
+    <h2><span class="n">15.</span> Consentimiento</h2>
+    <div class="lead-rule"></div>
+    <p>Presto mi consentimiento para que mis datos personales sean tratados y transmitidos por encargados de tratamiento ubicados en <mark class="ph">Estados Unidos</mark>, Bolivia y otras jurisdicciones, para que los utilicen con los fines indicados en esta Política, incluida la posibilidad de hacerme llegar, vía correo electrónico u otro medio, información sobre promociones y novedades relacionadas con Foodix. Asimismo, reconozco que, de presentarse una venta, fusión, consolidación, cambio de control societario, transferencia sustancial de activos, reorganización o liquidación de Foodix, la empresa podrá transferir o asignar los datos personales a una o más partes relevantes, incluidas Sociedades Vinculadas.</p>
+  </section>
+</main>
+
+<footer>
+  <div class="in">
+    <span>© 2026 Foodix. Todos los derechos reservados.</span>
+    <span><a href="index.html">Inicio</a> · Santa Cruz de la Sierra, Bolivia</span>
+  </div>
+</footer>
+
+</body>
+</html>
