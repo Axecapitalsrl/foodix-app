@@ -106,10 +106,10 @@
   /* ---------- Hero (siempre oscuro) ---------- */
   .hero{position:relative;overflow:hidden;background:var(--brand-dark);color:var(--on-dark)}
   .hero-inner{position:relative;z-index:2;padding:66px 0 78px;max-width:660px}
-  .eyebrow{display:inline-flex;align-items:center;gap:8px;text-transform:uppercase;
-    letter-spacing:.16em;font-size:12px;font-weight:800;color:var(--on-dark);
+  .eyebrow{display:inline-block;text-transform:uppercase;line-height:1.5;
+    letter-spacing:.14em;font-size:12px;font-weight:800;color:var(--on-dark);
     background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16);
-    padding:7px 13px;border-radius:999px}
+    padding:7px 14px;border-radius:16px}
   .eyebrow b{color:var(--gold)}
   .hero h1{font-style:italic;font-weight:900;letter-spacing:-1.6px;line-height:1.02;
     font-size:clamp(38px,6vw,66px);margin:20px 0 12px;text-wrap:balance;transform:skewX(-3deg)}
@@ -260,6 +260,7 @@
     .loc small{display:none}
     .trust{gap:16px}
     .hero h1{letter-spacing:-1px}
+    .eyebrow{font-size:10.5px;letter-spacing:.06em;padding:7px 12px}
   }
 </style>
 </head>
