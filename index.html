@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<script>try{var t=localStorage.getItem('foodix-theme');if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
 <title>Foodix — Pedí lo que quieras</title>
 <meta name="description" content="Foodix — pedí tu comida favorita, más rápido que nunca. Cientos de locales en Santa Cruz de la Sierra, a un solo clic.">
 <meta name="theme-color" content="#262626">
@@ -494,7 +495,9 @@
   function toggleTheme(){
     const cur=root.getAttribute('data-theme')
       || (matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');
-    root.setAttribute('data-theme',cur==='dark'?'light':'dark');
+    const next=cur==='dark'?'light':'dark';
+    root.setAttribute('data-theme',next);
+    try{localStorage.setItem('foodix-theme',next);}catch(e){}
   }
   document.getElementById('themeBtn').addEventListener('click',toggleTheme);
   document.getElementById('themeBtnM').addEventListener('click',toggleTheme);
