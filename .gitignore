@@ -6,3 +6,6 @@ Thumbs.db
 # Dependencies (por si más adelante sumás build)
 node_modules/
 .vercel/
+
+# Config local de herramientas
+.claude/
