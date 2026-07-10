@@ -1,0 +1,450 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Foodix — Pedí lo que quieras</title>
+<style>
+  :root{
+    --red:#E41E1B;
+    --red-deep:#B0110F;
+    --gold:#F2B11E;
+    --gold-deep:#C0870A;
+    /* Fijos de marca (siempre oscuros en ambos temas) */
+    --brand-dark:#262626;
+    --brand-dark-2:#333333;
+    --brand-line:rgba(255,255,255,.12);
+    --on-dark:#F6F4F4;
+    --on-dark-soft:rgba(246,244,244,.72);
+    /* Contenido adaptable */
+    --paper:#FFFFFF;
+    --surface:#FFFFFF;
+    --wash:#F6F3F3;
+    --wash-2:#EEE9E9;
+    --ink:#161418;
+    --ink-soft:#413E46;
+    --muted:#8A828C;
+    --line:#E7E0E2;
+    --green:#12A150;
+    --amber:#FFB300;
+    --shadow:0 1px 2px rgba(20,20,22,.05),0 8px 24px -12px rgba(20,20,22,.18);
+    --shadow-lift:0 2px 6px rgba(20,20,22,.08),0 20px 40px -18px rgba(196,13,20,.28);
+    --radius:16px;
+    --maxw:1180px;
+    --sans:"Helvetica Neue",Arial,system-ui,sans-serif;
+  }
+  @media (prefers-color-scheme:dark){
+    :root{
+      --paper:#0E0D10;--surface:#1A181D;--wash:#151318;--wash-2:#211E25;
+      --ink:#F4F1F4;--ink-soft:#CFC8D2;--muted:#948C98;--line:#2B2731;
+      --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 30px -14px rgba(0,0,0,.7);
+      --shadow-lift:0 2px 6px rgba(0,0,0,.5),0 24px 48px -20px rgba(237,28,36,.4);
+    }
+  }
+  :root[data-theme="light"]{
+    --paper:#FFFFFF;--surface:#FFFFFF;--wash:#F6F3F3;--wash-2:#EEE9E9;
+    --ink:#161418;--ink-soft:#413E46;--muted:#8A828C;--line:#E7E0E2;
+    --shadow:0 1px 2px rgba(20,20,22,.05),0 8px 24px -12px rgba(20,20,22,.18);
+    --shadow-lift:0 2px 6px rgba(20,20,22,.08),0 20px 40px -18px rgba(196,13,20,.28);
+  }
+  :root[data-theme="dark"]{
+    --paper:#0E0D10;--surface:#1A181D;--wash:#151318;--wash-2:#211E25;
+    --ink:#F4F1F4;--ink-soft:#CFC8D2;--muted:#948C98;--line:#2B2731;
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 30px -14px rgba(0,0,0,.7);
+    --shadow-lift:0 2px 6px rgba(0,0,0,.5),0 24px 48px -20px rgba(237,28,36,.4);
+  }
+
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--paper);color:var(--ink);
+    font-family:var(--sans);line-height:1.5;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
+  a{color:inherit;text-decoration:none}
+  button{font-family:inherit;cursor:pointer}
+  :focus-visible{outline:3px solid var(--red);outline-offset:2px;border-radius:6px}
+  @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+
+  /* ---------- Logo (imagen real) ---------- */
+  .brand{display:inline-flex;align-items:center}
+  .brand img{display:block;height:38px;width:auto}
+  .foot-brand .brand img{height:44px}
+
+  /* ---------- Top bar (oscuro de marca) ---------- */
+  header.top{position:sticky;top:0;z-index:50;background:var(--brand-dark);
+    border-bottom:1px solid var(--brand-line)}
+  .top-row{display:flex;align-items:center;gap:18px;height:74px}
+  .loc{display:flex;align-items:center;gap:8px;padding:8px 14px;border:1px solid rgba(255,255,255,.16);
+    border-radius:999px;background:rgba(255,255,255,.05);color:#fff;font-size:14px;font-weight:600;white-space:nowrap}
+  .loc:hover{background:rgba(255,255,255,.1)}
+  .loc small{color:rgba(255,255,255,.6);font-weight:500}
+  .loc .pin{color:var(--gold)}
+  .search{flex:1;position:relative;min-width:120px}
+  .search input{width:100%;height:44px;border-radius:999px;border:1px solid rgba(255,255,255,.14);
+    background:rgba(255,255,255,.08);color:#fff;padding:0 16px 0 44px;font-size:15px}
+  .search input::placeholder{color:rgba(255,255,255,.55)}
+  .search svg{position:absolute;left:15px;top:50%;transform:translateY(-50%);color:rgba(255,255,255,.6)}
+  .top-actions{display:flex;align-items:center;gap:10px}
+  .btn{border-radius:999px;font-weight:700;font-size:14px;padding:11px 18px;border:1px solid transparent;white-space:nowrap}
+  .btn-ghost{background:transparent;color:var(--ink);border-color:var(--line)}
+  .btn-ghost:hover{background:var(--wash)}
+  .btn-red{background:var(--red);color:#fff}
+  .btn-red:hover{background:var(--red-deep)}
+  .btn-gold{background:var(--gold);color:#231800}
+  .btn-gold:hover{background:var(--gold-deep)}
+  .top-actions .btn-login{background:var(--red);color:#fff;border-color:transparent}
+  .top-actions .btn-login:hover{background:var(--red-deep)}
+  .cart{position:relative;display:inline-flex;align-items:center;justify-content:center;
+    width:44px;height:44px;border-radius:999px;border:1px solid rgba(255,255,255,.16);
+    background:rgba(255,255,255,.05);color:#fff}
+  .cart:hover{background:rgba(255,255,255,.1)}
+  .cart b{position:absolute;top:-4px;right:-4px;background:var(--gold);color:#231800;font-size:11px;
+    font-weight:800;min-width:18px;height:18px;border-radius:999px;display:grid;place-items:center;padding:0 4px}
+  .theme-toggle{width:44px;height:44px;border-radius:999px;border:1px solid rgba(255,255,255,.16);
+    background:rgba(255,255,255,.05);color:#fff;display:grid;place-items:center}
+  .theme-toggle:hover{background:rgba(255,255,255,.1)}
+
+  /* ---------- Hero (siempre oscuro) ---------- */
+  .hero{position:relative;overflow:hidden;background:var(--brand-dark);color:var(--on-dark)}
+  .hero-inner{position:relative;z-index:2;padding:66px 0 78px;max-width:660px}
+  .eyebrow{display:inline-flex;align-items:center;gap:8px;text-transform:uppercase;
+    letter-spacing:.16em;font-size:12px;font-weight:800;color:var(--on-dark);
+    background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16);
+    padding:7px 13px;border-radius:999px}
+  .eyebrow b{color:var(--gold)}
+  .hero h1{font-style:italic;font-weight:900;letter-spacing:-1.6px;line-height:1.02;
+    font-size:clamp(38px,6vw,66px);margin:20px 0 12px;text-wrap:balance;transform:skewX(-3deg)}
+  .hero h1 em{color:var(--red);font-style:italic}
+  .hero h1 u{color:var(--gold);text-decoration:none;font-style:italic}
+  .hero p.lede{font-size:18px;color:var(--on-dark-soft);margin:0 0 28px;max-width:34ch}
+  .addr{display:flex;gap:10px;background:#fff;border-radius:14px;padding:8px;box-shadow:var(--shadow-lift);flex-wrap:wrap}
+  .addr .field{flex:1;display:flex;align-items:center;gap:10px;padding:0 12px;min-width:180px}
+  .addr .field svg{color:var(--red);flex:none}
+  .addr input{border:0;outline:0;width:100%;height:48px;font-size:16px;color:#161418;background:transparent}
+  .addr input::placeholder{color:#9a9a9a}
+  .addr .go{background:var(--red);color:#fff;border:0;border-radius:10px;padding:0 26px;font-weight:800;font-size:16px}
+  .addr .go:hover{background:var(--red-deep)}
+  .trust{display:flex;gap:26px;margin-top:22px;flex-wrap:wrap}
+  .trust div{display:flex;align-items:baseline;gap:8px;font-size:14px;color:var(--on-dark-soft)}
+  .trust b{font-size:20px;color:#fff;font-style:italic}
+  .trust b.g{color:var(--gold)}
+
+  /* ---------- Sections ---------- */
+  section{padding:46px 0}
+  .sec-head{display:flex;align-items:baseline;justify-content:space-between;gap:16px;margin-bottom:22px}
+  .sec-head h2{position:relative;font-size:clamp(22px,3vw,30px);font-weight:900;font-style:italic;
+    letter-spacing:-.6px;margin:0;transform:skewX(-3deg);padding-bottom:9px}
+  .sec-head h2::after{content:"";position:absolute;left:2px;bottom:0;width:46px;height:4px;border-radius:3px;background:var(--red)}
+  .sec-head a{color:var(--red);font-weight:800;font-size:14px}
+  .sec-head a:hover{text-decoration:underline}
+
+  /* categories */
+  .cats{display:flex;gap:14px;overflow-x:auto;padding:6px 2px 12px;scrollbar-width:thin}
+  .cat{flex:none;width:104px;text-align:center;background:var(--surface);border:1px solid var(--line);
+    border-radius:var(--radius);padding:16px 8px;box-shadow:var(--shadow);
+    transition:transform .15s,box-shadow .15s,border-color .15s}
+  .cat:hover{transform:translateY(-3px);box-shadow:var(--shadow-lift);border-color:var(--red)}
+  .cat .ico{width:52px;height:52px;margin:0 auto 8px;border-radius:14px;display:grid;place-items:center;
+    font-size:26px;background:var(--wash)}
+  .cat span{font-size:13px;font-weight:600;color:var(--ink)}
+
+  /* promo banners */
+  .promos{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .promo{position:relative;overflow:hidden;border-radius:var(--radius);padding:26px;min-height:152px;
+    color:#fff;box-shadow:var(--shadow);display:flex;flex-direction:column;justify-content:flex-end}
+  .promo h3{margin:0 0 4px;font-size:22px;font-weight:900;font-style:italic;letter-spacing:-.4px}
+  .promo h3 em{color:var(--gold);font-style:italic}
+  .promo p{margin:0;font-size:14px;opacity:.92}
+  .promo .tag{position:absolute;top:16px;left:16px;background:rgba(0,0,0,.3);
+    border:1px solid rgba(255,255,255,.25);padding:5px 11px;border-radius:999px;font-size:12px;font-weight:800;letter-spacing:.04em}
+  .promo.a{background:linear-gradient(135deg,#ED1C24,#7c0206)}
+  .promo.b{background:linear-gradient(135deg,#242128,#3a2b12)}
+  .promo.c{background:linear-gradient(135deg,#FFC220,#c07f00);color:#211700}
+  .promo.c p{opacity:.82}
+  .promo.c .tag{background:rgba(0,0,0,.16);border-color:rgba(0,0,0,.2);color:#211700}
+
+  /* restaurant grid */
+  .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
+  .card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
+    overflow:hidden;box-shadow:var(--shadow);transition:transform .16s,box-shadow .16s;display:flex;flex-direction:column}
+  .card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lift)}
+  .thumb{position:relative;aspect-ratio:16/10;display:grid;place-items:center;overflow:hidden}
+  .thumb .emoji{font-size:52px;filter:drop-shadow(0 6px 12px rgba(0,0,0,.25))}
+  .badge-off{position:absolute;top:12px;left:12px;background:var(--gold);color:#211700;font-size:12px;
+    font-weight:900;padding:5px 10px;border-radius:8px;letter-spacing:.02em}
+  .fav{position:absolute;top:10px;right:10px;width:34px;height:34px;border-radius:999px;border:0;
+    background:rgba(255,255,255,.92);color:#161418;display:grid;place-items:center;box-shadow:var(--shadow)}
+  .fav:hover{color:var(--red)}
+  .card-body{padding:14px 15px 16px;display:flex;flex-direction:column;gap:8px;flex:1}
+  .card-top{display:flex;justify-content:space-between;align-items:center;gap:8px}
+  .card-body h3{margin:0;font-size:16.5px;font-weight:800;letter-spacing:-.2px}
+  .card-meta{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--muted);flex-wrap:wrap}
+  .rate{display:inline-flex;align-items:center;gap:4px;font-weight:800;color:var(--ink)}
+  .rate svg{color:var(--amber)}
+  .price{font-size:13px;color:var(--muted)}
+  .price b{color:var(--gold-deep);font-weight:900;font-size:15px}
+  .card-foot{display:flex;align-items:center;gap:14px;margin-top:auto;padding-top:10px;
+    border-top:1px solid var(--line);font-size:13px;color:var(--ink-soft)}
+  .card-foot span{display:inline-flex;align-items:center;gap:6px}
+  .card-foot svg{color:var(--muted)}
+  .free{color:var(--green);font-weight:800}
+  .open{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:800;color:var(--green)}
+  .open i{width:7px;height:7px;border-radius:999px;background:var(--green);box-shadow:0 0 0 3px rgba(18,161,80,.18)}
+
+  /* how it works */
+  .strip{background:var(--wash);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+  .step{display:flex;gap:14px;align-items:flex-start}
+  .step .n{flex:none;width:44px;height:44px;border-radius:12px;background:var(--red);color:#fff;
+    font-weight:900;font-style:italic;font-size:20px;display:grid;place-items:center;transform:skewX(-6deg)}
+  .step h4{margin:0 0 4px;font-size:16px;font-weight:800}
+  .step p{margin:0;font-size:14px;color:var(--muted)}
+
+  /* partner (siempre oscuro) */
+  .partner{display:grid;grid-template-columns:1.1fr .9fr;gap:30px;align-items:center;
+    background:var(--brand-dark);color:#fff;border-radius:24px;padding:44px;position:relative;overflow:hidden}
+  .partner h2{position:relative;z-index:2;font-size:clamp(24px,3.4vw,36px);font-style:italic;font-weight:900;
+    letter-spacing:-.6px;margin:0 0 10px;transform:skewX(-3deg)}
+  .partner h2 em{color:var(--gold);font-style:italic}
+  .partner p{position:relative;z-index:2;color:rgba(255,255,255,.82);margin:0 0 20px;max-width:42ch}
+  .partner .cta-row{position:relative;z-index:2;display:flex;gap:12px;flex-wrap:wrap}
+  .partner-stats{position:relative;z-index:2;display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  .pstat{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:16px;padding:18px}
+  .pstat b{display:block;font-size:30px;font-weight:900;font-style:italic;letter-spacing:-.5px;color:var(--gold)}
+  .pstat span{font-size:13px;color:rgba(255,255,255,.7)}
+
+  /* footer (siempre oscuro) */
+  footer{background:var(--brand-dark);color:var(--on-dark);padding:48px 0 30px;margin-top:10px;
+    border-top:3px solid var(--red)}
+  .foot-grid{display:grid;grid-template-columns:1.4fr repeat(3,1fr);gap:30px;margin-bottom:34px}
+  .foot-grid h5{font-size:12px;text-transform:uppercase;letter-spacing:.12em;color:var(--gold);margin:0 0 14px}
+  .foot-grid ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
+  .foot-grid a{font-size:14px;color:rgba(255,255,255,.72)}
+  .foot-grid a:hover{color:#fff}
+  .foot-brand p{font-size:14px;color:rgba(255,255,255,.6);max-width:34ch;margin:14px 0 0}
+  .foot-bottom{display:flex;justify-content:space-between;gap:16px;padding-top:22px;
+    border-top:1px solid var(--brand-line);font-size:13px;color:rgba(255,255,255,.55);flex-wrap:wrap}
+  .stores{display:flex;gap:10px;flex-wrap:wrap}
+  .store{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--brand-line);border-radius:12px;
+    padding:9px 14px;font-size:13px;font-weight:700;color:#fff;background:rgba(255,255,255,.04)}
+  .store:hover{border-color:var(--gold)}
+  .store small{display:block;font-size:10px;color:rgba(255,255,255,.55);font-weight:500;letter-spacing:.04em}
+
+  @media (max-width:960px){
+    .promos{grid-template-columns:1fr 1fr}
+    .grid{grid-template-columns:1fr 1fr}
+    .steps{grid-template-columns:1fr}
+    .partner{grid-template-columns:1fr}
+    .foot-grid{grid-template-columns:1fr 1fr}
+  }
+  @media (max-width:620px){
+    .top-actions .btn-ghost,.loc small{display:none}
+    .promos{grid-template-columns:1fr}
+    .grid{grid-template-columns:1fr}
+    .foot-grid{grid-template-columns:1fr}
+    .hero-inner{padding:44px 0 54px}
+  }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap top-row">
+    <a class="brand" href="#" aria-label="Foodix inicio">
+      <img src="assets/foodix-logo.png" alt="Foodix">
+    </a>
+    <button class="loc" type="button">
+      <svg class="pin" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a7 7 0 0 0-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6a2.5 2.5 0 0 1 0 5.5z"/></svg>
+      <span>Av. San Martín, Equipetrol <small>· Santa Cruz</small></span>
+    </button>
+    <div class="search">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+      <input type="search" placeholder="Buscá comida, locales o productos…" aria-label="Buscar">
+    </div>
+    <div class="top-actions">
+      <button class="theme-toggle" id="themeBtn" type="button" aria-label="Cambiar tema">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3a9 9 0 1 0 9 9 7 7 0 0 1-9-9z"/></svg>
+      </button>
+      <a class="btn btn-login" href="#">Ingresar</a>
+      <button class="cart" type="button" aria-label="Carrito">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="18" cy="21" r="1"/><path d="M1 1h4l2.6 13.4a2 2 0 0 0 2 1.6h9.7a2 2 0 0 0 2-1.6L23 6H6"/></svg>
+        <b>2</b>
+      </button>
+    </div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap hero-inner">
+    <span class="eyebrow">Ya en <b>Santa Cruz de la Sierra</b> · pronto en toda Bolivia</span>
+    <h1>Tu comida favorita, <u>más rápido</u> que <em>nunca</em>.</h1>
+    <p class="lede">Cientos de locales, un solo lugar. Elegí, pagá y recibí sin moverte de casa.</p>
+    <div class="addr">
+      <div class="field">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a7 7 0 0 0-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6a2.5 2.5 0 0 1 0 5.5z"/></svg>
+        <input type="text" placeholder="Ingresá tu dirección de entrega" aria-label="Dirección de entrega">
+      </div>
+      <button class="go" type="button">Buscar</button>
+    </div>
+    <div class="trust">
+      <div><b class="g">1.200+</b>&nbsp;locales</div>
+      <div><b class="g">25 min</b>&nbsp;promedio</div>
+      <div><b class="g">4.8</b>&nbsp;★ en la app</div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>¿Qué se te antoja?</h2>
+      <a href="#">Ver todas las categorías →</a>
+    </div>
+    <div class="cats">
+      <a class="cat" href="#"><span class="ico">🍔</span><span>Hamburguesas</span></a>
+      <a class="cat" href="#"><span class="ico">🍕</span><span>Pizza</span></a>
+      <a class="cat" href="#"><span class="ico">🍗</span><span>Pollo</span></a>
+      <a class="cat" href="#"><span class="ico">🥟</span><span>Salteñas</span></a>
+      <a class="cat" href="#"><span class="ico">🍣</span><span>Sushi</span></a>
+      <a class="cat" href="#"><span class="ico">🍲</span><span>Almuerzos</span></a>
+      <a class="cat" href="#"><span class="ico">🥗</span><span>Saludable</span></a>
+      <a class="cat" href="#"><span class="ico">🍰</span><span>Postres</span></a>
+      <a class="cat" href="#"><span class="ico">🥤</span><span>Bebidas</span></a>
+      <a class="cat" href="#"><span class="ico">🛒</span><span>Mercado</span></a>
+      <a class="cat" href="#"><span class="ico">💊</span><span>Farmacia</span></a>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top:0">
+  <div class="wrap">
+    <div class="promos">
+      <a class="promo a" href="#">
+        <span class="tag">SOLO HOY</span>
+        <h3>2x1 en <em>hamburguesas</em></h3>
+        <p>En locales seleccionados hasta las 23:00</p>
+      </a>
+      <a class="promo b" href="#">
+        <span class="tag">FOODIX PRO</span>
+        <h3>Envío <em>gratis</em> todo el mes</h3>
+        <p>Suscribite y ahorrá en cada pedido</p>
+      </a>
+      <a class="promo c" href="#">
+        <span class="tag">NUEVO USUARIO</span>
+        <h3>Bs 30 de descuento</h3>
+        <p>En tu primer pedido con el código FOODIX30</p>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top:8px">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>Locales cerca tuyo</h2>
+      <a href="#">Ver todos →</a>
+    </div>
+    <div class="grid" id="grid"></div>
+  </div>
+</section>
+
+<section class="strip">
+  <div class="wrap">
+    <div class="sec-head"><h2>Pedir es facilísimo</h2></div>
+    <div class="steps">
+      <div class="step"><div class="n">1</div><div><h4>Elegí tu local</h4><p>Explorá por categoría, rating o cercanía y armá tu pedido.</p></div></div>
+      <div class="step"><div class="n">2</div><div><h4>Pagá como quieras</h4><p>Tarjeta, QR o efectivo al recibir. Seguro y sin vueltas.</p></div></div>
+      <div class="step"><div class="n">3</div><div><h4>Seguilo en vivo</h4><p>Mirá dónde viene tu repartidor hasta la puerta de tu casa.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="partner">
+      <div>
+        <h2>¿Tenés un local? <em>Sumate a Foodix.</em></h2>
+        <p>Subí tus productos, recibí pedidos y hacé crecer tu negocio con miles de clientes nuevos cada día.</p>
+        <div class="cta-row">
+          <a class="btn btn-red" href="#">Registrar mi local</a>
+          <a class="btn btn-ghost" href="#" style="color:#fff;border-color:rgba(255,255,255,.3)">Quiero ser repartidor</a>
+        </div>
+      </div>
+      <div class="partner-stats">
+        <div class="pstat"><b>+40%</b><span>ventas promedio en 3 meses</span></div>
+        <div class="pstat"><b>0%</b><span>comisión el primer mes</span></div>
+        <div class="pstat"><b>24/7</b><span>soporte para tu local</span></div>
+        <div class="pstat"><b>10 min</b><span>para publicar tu menú</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <a class="brand" href="#" aria-label="Foodix">
+          <img src="assets/foodix-logo.png" alt="Foodix">
+        </a>
+        <p>La forma más rápida de pedir comida y productos. Nacimos en Santa Cruz de la Sierra y vamos por toda Latinoamérica.</p>
+        <div class="stores" style="margin-top:16px">
+          <a class="store" href="#">▶ <span>Disponible en<small>Google Play</small></span></a>
+          <a class="store" href="#"> <span>Descargá en<small>App Store</small></span></a>
+        </div>
+      </div>
+      <div><h5>Foodix</h5><ul><li><a href="#">Sobre nosotros</a></li><li><a href="#">Trabajá con nosotros</a></li><li><a href="#">Prensa</a></li><li><a href="#">Blog</a></li></ul></div>
+      <div><h5>Para vos</h5><ul><li><a href="#">Registrar mi local</a></li><li><a href="#">Ser repartidor</a></li><li><a href="#">Foodix Pro</a></li><li><a href="#">Ayuda</a></li></ul></div>
+      <div><h5>Legales</h5><ul><li><a href="#">Términos y condiciones</a></li><li><a href="#">Privacidad</a></li><li><a href="#">Cookies</a></li></ul></div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Foodix. Todos los derechos reservados.</span>
+      <span>Hecho con ❤ en Santa Cruz de la Sierra</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const root=document.documentElement, tb=document.getElementById('themeBtn');
+  tb.addEventListener('click',()=>{
+    const cur=root.getAttribute('data-theme')
+      || (matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');
+    root.setAttribute('data-theme',cur==='dark'?'light':'dark');
+  });
+
+  const locales=[
+    {n:"Burger Republic",cat:"Hamburguesas · Americana",e:"🍔",bg:"linear-gradient(135deg,#F6A623,#C4560D)",r:"4.7",t:"25-35",env:"Bs 8",pr:"Bs 32",off:"-20%"},
+    {n:"Napoli Pizza & Pasta",cat:"Pizza · Italiana",e:"🍕",bg:"linear-gradient(135deg,#ED1C24,#7a0d10)",r:"4.5",t:"30-40",env:"Gratis",pr:"Bs 45",free:true},
+    {n:"Pollos Copacabana",cat:"Pollo · Broaster",e:"🍗",bg:"linear-gradient(135deg,#E8B923,#8a5a06)",r:"4.8",t:"20-30",env:"Bs 6",pr:"Bs 28"},
+    {n:"Sushi Ya!",cat:"Japonesa · Sushi",e:"🍣",bg:"linear-gradient(135deg,#1f2b3a,#0b1119)",r:"4.6",t:"35-45",env:"Bs 12",pr:"Bs 55",off:"-15%"},
+    {n:"Doña Ely Salteñas",cat:"Salteñas · Boliviana",e:"🥟",bg:"linear-gradient(135deg,#D98324,#8a4a08)",r:"4.9",t:"15-25",env:"Bs 5",pr:"Bs 8"},
+    {n:"El Buen Pique",cat:"Boliviana · Parrilla",e:"🍖",bg:"linear-gradient(135deg,#7a2e12,#3a1206)",r:"4.4",t:"30-40",env:"Bs 10",pr:"Bs 40"},
+    {n:"Green Bowl",cat:"Saludable · Ensaladas",e:"🥗",bg:"linear-gradient(135deg,#12A150,#0a5f30)",r:"4.5",t:"25-35",env:"Gratis",pr:"Bs 35",free:true},
+    {n:"Heladería Dumbo",cat:"Postres · Helados",e:"🍨",bg:"linear-gradient(135deg,#E85D9A,#8a2456)",r:"4.7",t:"20-30",env:"Bs 7",pr:"Bs 18",off:"2x1"}
+  ];
+  const grid=document.getElementById('grid');
+  grid.innerHTML=locales.map(l=>`
+    <article class="card">
+      <div class="thumb" style="background:${l.bg}">
+        <span class="emoji">${l.e}</span>
+        ${l.off?`<span class="badge-off">${l.off}</span>`:''}
+        <button class="fav" type="button" aria-label="Guardar">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 1 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg>
+        </button>
+      </div>
+      <div class="card-body">
+        <div class="card-top">
+          <span class="open"><i></i>Abierto</span>
+          <span class="rate"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.9 21l1.2-6.8-5-4.9 6.9-1z"/></svg>${l.r}</span>
+        </div>
+        <h3>${l.n}</h3>
+        <div class="card-meta">${l.cat}</div>
+        <div class="price">Desde <b>${l.pr}</b></div>
+        <div class="card-foot">
+          <span><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>${l.t} min</span>
+          <span><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 13h13V6H3zM16 8h3l2 3v2h-5z"/><circle cx="7" cy="17" r="1.6"/><circle cx="18" cy="17" r="1.6"/></svg><span class="${l.free?'free':''}">${l.env}</span></span>
+        </div>
+      </div>
+    </article>`).join('');
+</script>
+</body>
+</html>
