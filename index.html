@@ -102,10 +102,35 @@
   .theme-toggle{width:44px;height:44px;border-radius:999px;border:1px solid rgba(255,255,255,.16);
     background:rgba(255,255,255,.05);color:#fff;display:grid;place-items:center}
   .theme-toggle:hover{background:rgba(255,255,255,.1)}
+  .loc .chev{opacity:.7;flex:none}
+  .menu-btn{display:none;width:44px;height:44px;border-radius:12px;place-items:center;
+    border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.05);color:#fff}
+  .menu-btn:hover{background:rgba(255,255,255,.1)}
+
+  /* Desplegables del header */
+  .drop{position:absolute;top:100%;left:0;right:0;background:var(--brand-dark);
+    border-top:1px solid var(--brand-line);z-index:60;
+    box-shadow:0 22px 34px -14px rgba(0,0,0,.55)}
+  .drop[hidden]{display:none}
+  .drop .wrap{padding-top:16px;padding-bottom:16px;display:flex;flex-direction:column;gap:10px}
+  .loc-banner label{font-size:12px;text-transform:uppercase;letter-spacing:.1em;
+    color:rgba(255,255,255,.6);font-weight:700}
+  .loc-banner input{height:46px;border-radius:12px;border:1px solid rgba(255,255,255,.14);
+    background:rgba(255,255,255,.08);color:#fff;padding:0 14px;font-size:15px}
+  .loc-banner input::placeholder{color:rgba(255,255,255,.5)}
+  .loc-banner .btn-red{align-self:flex-start}
+  .mobile-menu .btn-login{width:100%;text-align:center;padding:13px;background:var(--red);color:#fff}
+  .mobile-menu .btn-login:hover{background:var(--red-deep)}
+  .mm-item{display:flex;align-items:center;justify-content:space-between;gap:10px;width:100%;
+    background:rgba(255,255,255,.05);border:1px solid var(--brand-line);color:#fff;
+    border-radius:12px;padding:13px 15px;font-size:15px;font-weight:600}
+  .mm-item:hover{background:rgba(255,255,255,.1)}
+  .mm-item .badge{background:var(--gold);color:#231800;border-radius:999px;
+    padding:1px 9px;font-weight:800;font-size:12px}
 
   /* ---------- Hero (siempre oscuro) ---------- */
   .hero{position:relative;overflow:hidden;background:var(--brand-dark);color:var(--on-dark)}
-  .hero-inner{position:relative;z-index:2;padding:66px 0 78px;max-width:660px}
+  .hero-inner{position:relative;z-index:2;padding:56px 0 70px;max-width:640px}
   .eyebrow{display:inline-block;text-transform:uppercase;line-height:1.5;
     letter-spacing:.14em;font-size:12px;font-weight:800;color:var(--on-dark);
     background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16);
@@ -237,29 +262,33 @@
     .foot-grid{grid-template-columns:1fr 1fr}
   }
   @media (max-width:760px){
-    /* Barra superior en dos filas: marca + ubicación / buscador full width */
-    .top-row{flex-wrap:wrap;height:auto;padding:11px 0;gap:10px 12px}
+    /* Barra superior: marca + ubicación compacta + hamburguesa / buscador abajo */
+    .top-row{flex-wrap:wrap;height:auto;padding:11px 0;gap:10px}
     .brand{order:1}
     .brand img{height:30px}
-    .loc{order:2;flex:1 1 auto;min-width:0}
+    .loc{order:2;flex:0 1 auto;max-width:190px;min-width:0;padding:8px 12px;font-size:13px}
     .loc span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
     .top-actions{order:3;margin-left:auto}
-    .theme-toggle{display:none}
+    .theme-toggle,.top-actions .btn-login,.cart{display:none}
+    .menu-btn{display:grid}
     .search{order:4;flex:1 1 100%;min-width:0}
     /* Buscador del hero apilado */
     .addr{flex-direction:column}
     .addr .field{min-width:0}
     .addr .go{width:100%;height:50px}
     .grid{grid-template-columns:1fr 1fr}
+    /* Socios: botones lado a lado */
+    .partner{padding:26px 20px}
+    .partner .cta-row{flex-wrap:nowrap;gap:10px}
+    .partner .cta-row .btn{flex:1;text-align:center;padding:12px 8px;font-size:13px}
   }
   @media (max-width:620px){
     .promos{grid-template-columns:1fr}
     .grid{grid-template-columns:1fr}
     .foot-grid{grid-template-columns:1fr}
-    .hero-inner{padding:44px 0 54px}
-    .loc small{display:none}
-    .trust{gap:16px}
-    .hero h1{letter-spacing:-1px}
+    .hero-inner{padding:24px 0 44px}
+    .hero h1{font-size:34px;letter-spacing:-1px}
+    .hero p.lede{font-size:16px}
     .eyebrow{font-size:10.5px;letter-spacing:.06em;padding:7px 12px}
   }
 </style>
@@ -271,9 +300,10 @@
     <a class="brand" href="#" aria-label="Foodix inicio">
       <img src="assets/foodix-logo.png" alt="Foodix">
     </a>
-    <button class="loc" type="button">
+    <button class="loc" id="locBtn" type="button" aria-expanded="false">
       <svg class="pin" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a7 7 0 0 0-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6a2.5 2.5 0 0 1 0 5.5z"/></svg>
-      <span>Av. San Martín, Equipetrol <small>· Santa Cruz</small></span>
+      <span>Av. San Martín, Equipetrol</span>
+      <svg class="chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m6 9 6 6 6-6"/></svg>
     </button>
     <div class="search">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
@@ -288,26 +318,42 @@
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="18" cy="21" r="1"/><path d="M1 1h4l2.6 13.4a2 2 0 0 0 2 1.6h9.7a2 2 0 0 0 2-1.6L23 6H6"/></svg>
         <b>2</b>
       </button>
+      <button class="menu-btn" id="menuBtn" type="button" aria-label="Menú" aria-expanded="false">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <div class="drop loc-banner" id="locBanner" hidden>
+    <div class="wrap">
+      <label>Tu dirección de entrega</label>
+      <input type="text" placeholder="Ej: Av. San Martín, Equipetrol, Santa Cruz" aria-label="Dirección">
+      <button class="btn btn-red" type="button">Confirmar ubicación</button>
+    </div>
+  </div>
+
+  <div class="drop mobile-menu" id="mobileMenu" hidden>
+    <div class="wrap">
+      <a class="btn btn-login" href="#">Ingresar</a>
+      <button class="mm-item" type="button">Mi carrito <span class="badge">2</span></button>
+      <button class="mm-item" id="themeBtnM" type="button">Cambiar tema</button>
     </div>
   </div>
 </header>
 
 <section class="hero">
-  <div class="wrap hero-inner">
-    <span class="eyebrow">Ya en <b>Santa Cruz de la Sierra</b> · pronto en toda Bolivia</span>
-    <h1>Tu comida favorita, <u>más rápido</u> que <em>nunca</em>.</h1>
-    <p class="lede">Cientos de locales, un solo lugar. Elegí, pagá y recibí sin moverte de casa.</p>
-    <div class="addr">
-      <div class="field">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a7 7 0 0 0-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6a2.5 2.5 0 0 1 0 5.5z"/></svg>
-        <input type="text" placeholder="Ingresá tu dirección de entrega" aria-label="Dirección de entrega">
+  <div class="wrap">
+    <div class="hero-inner">
+      <span class="eyebrow">Ya en <b>Santa Cruz de la Sierra</b> · pronto en toda Bolivia</span>
+      <h1>Tu comida favorita, <u>más rápido</u> que <em>nunca</em>.</h1>
+      <p class="lede">Cientos de locales, un solo lugar. Elegí, pagá y recibí sin moverte de casa.</p>
+      <div class="addr">
+        <div class="field">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a7 7 0 0 0-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6a2.5 2.5 0 0 1 0 5.5z"/></svg>
+          <input type="text" placeholder="Ingresá tu dirección de entrega" aria-label="Dirección de entrega">
+        </div>
+        <button class="go" type="button">Buscar</button>
       </div>
-      <button class="go" type="button">Buscar</button>
-    </div>
-    <div class="trust">
-      <div><b class="g">1.200+</b>&nbsp;locales</div>
-      <div><b class="g">25 min</b>&nbsp;promedio</div>
-      <div><b class="g">4.8</b>&nbsp;★ en la app</div>
     </div>
   </div>
 </section>
@@ -423,11 +469,35 @@
 </footer>
 
 <script>
-  const root=document.documentElement, tb=document.getElementById('themeBtn');
-  tb.addEventListener('click',()=>{
+  const root=document.documentElement;
+  function toggleTheme(){
     const cur=root.getAttribute('data-theme')
       || (matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');
     root.setAttribute('data-theme',cur==='dark'?'light':'dark');
+  }
+  document.getElementById('themeBtn').addEventListener('click',toggleTheme);
+  document.getElementById('themeBtnM').addEventListener('click',toggleTheme);
+
+  // Desplegables del header (ubicación y menú)
+  const locBtn=document.getElementById('locBtn'), locBanner=document.getElementById('locBanner');
+  const menuBtn=document.getElementById('menuBtn'), mobileMenu=document.getElementById('mobileMenu');
+  function setOpen(panel,btn,open){
+    panel.hidden=!open;
+    if(btn) btn.setAttribute('aria-expanded',String(open));
+  }
+  function togglePanel(panel,btn){
+    const open=panel.hidden;
+    // cerrar el otro
+    if(panel!==locBanner) setOpen(locBanner,locBtn,false);
+    if(panel!==mobileMenu) setOpen(mobileMenu,menuBtn,false);
+    setOpen(panel,btn,open);
+  }
+  locBtn.addEventListener('click',e=>{e.stopPropagation();togglePanel(locBanner,locBtn);});
+  menuBtn.addEventListener('click',e=>{e.stopPropagation();togglePanel(mobileMenu,menuBtn);});
+  // cerrar al tocar fuera
+  document.addEventListener('click',e=>{
+    if(!e.target.closest('#locBanner,#locBtn')) setOpen(locBanner,locBtn,false);
+    if(!e.target.closest('#mobileMenu,#menuBtn')) setOpen(mobileMenu,menuBtn,false);
   });
 
   const locales=[
