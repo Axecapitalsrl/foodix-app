@@ -220,6 +220,7 @@
   .card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lift)}
   .thumb{position:relative;aspect-ratio:16/10;display:grid;place-items:center;overflow:hidden}
   .thumb .emoji{font-size:52px;filter:drop-shadow(0 6px 12px rgba(0,0,0,.25))}
+  .thumb-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
   .badge-off{position:absolute;top:12px;left:12px;background:var(--gold);color:#211700;font-size:12px;
     font-weight:900;padding:5px 10px;border-radius:8px;letter-spacing:.02em}
   .fav{position:absolute;top:10px;right:10px;width:34px;height:34px;border-radius:999px;border:0;
@@ -529,20 +530,20 @@
   });
 
   const locales=[
-    {n:"Burger Republic",cat:"Hamburguesas · Americana",e:"🍔",bg:"linear-gradient(135deg,#F6A623,#C4560D)",r:"4.7",t:"25-35",env:"Bs 8",pr:"Bs 32",off:"-20%"},
-    {n:"Napoli Pizza & Pasta",cat:"Pizza · Italiana",e:"🍕",bg:"linear-gradient(135deg,#ED1C24,#7a0d10)",r:"4.5",t:"30-40",env:"Gratis",pr:"Bs 45",free:true},
-    {n:"Pollos Copacabana",cat:"Pollo · Broaster",e:"🍗",bg:"linear-gradient(135deg,#E8B923,#8a5a06)",r:"4.8",t:"20-30",env:"Bs 6",pr:"Bs 28"},
-    {n:"Sushi Ya!",cat:"Japonesa · Sushi",e:"🍣",bg:"linear-gradient(135deg,#1f2b3a,#0b1119)",r:"4.6",t:"35-45",env:"Bs 12",pr:"Bs 55",off:"-15%"},
-    {n:"Doña Ely Salteñas",cat:"Salteñas · Boliviana",e:"🥟",bg:"linear-gradient(135deg,#D98324,#8a4a08)",r:"4.9",t:"15-25",env:"Bs 5",pr:"Bs 8"},
-    {n:"El Buen Pique",cat:"Boliviana · Parrilla",e:"🍖",bg:"linear-gradient(135deg,#7a2e12,#3a1206)",r:"4.4",t:"30-40",env:"Bs 10",pr:"Bs 40"},
-    {n:"Green Bowl",cat:"Saludable · Ensaladas",e:"🥗",bg:"linear-gradient(135deg,#12A150,#0a5f30)",r:"4.5",t:"25-35",env:"Gratis",pr:"Bs 35",free:true},
-    {n:"Heladería Dumbo",cat:"Postres · Helados",e:"🍨",bg:"linear-gradient(135deg,#E85D9A,#8a2456)",r:"4.7",t:"20-30",env:"Bs 7",pr:"Bs 18",off:"2x1"}
+    {n:"Burger Republic",cat:"Hamburguesas · Americana",img:"assets/locales/burger-republic.jpg",bg:"linear-gradient(135deg,#F6A623,#C4560D)",r:"4.7",t:"25-35",env:"Bs 8",pr:"Bs 32",off:"-20%"},
+    {n:"Napoli Pizza & Pasta",cat:"Pizza · Italiana",img:"assets/locales/napoli.jpg",bg:"linear-gradient(135deg,#ED1C24,#7a0d10)",r:"4.5",t:"30-40",env:"Gratis",pr:"Bs 45",free:true},
+    {n:"Pollos Copacabana",cat:"Pollo · Broaster",img:"assets/locales/pollos-copacabana.webp",bg:"linear-gradient(135deg,#E8B923,#8a5a06)",r:"4.8",t:"20-30",env:"Bs 6",pr:"Bs 28"},
+    {n:"Sushi Ya!",cat:"Japonesa · Sushi",img:"assets/locales/sushi-ya.jpg",bg:"linear-gradient(135deg,#1f2b3a,#0b1119)",r:"4.6",t:"35-45",env:"Bs 12",pr:"Bs 55",off:"-15%"},
+    {n:"Doña Ely Salteñas",cat:"Salteñas · Boliviana",img:"assets/locales/dona-ely.jpg",bg:"linear-gradient(135deg,#D98324,#8a4a08)",r:"4.9",t:"15-25",env:"Bs 5",pr:"Bs 8"},
+    {n:"El Buen Pique",cat:"Boliviana · Parrilla",img:"assets/locales/el-buen-pique.jpg",bg:"linear-gradient(135deg,#7a2e12,#3a1206)",r:"4.4",t:"30-40",env:"Bs 10",pr:"Bs 40"},
+    {n:"Green Bowl",cat:"Saludable · Ensaladas",img:"assets/locales/green-bowl.jpg",bg:"linear-gradient(135deg,#12A150,#0a5f30)",r:"4.5",t:"25-35",env:"Gratis",pr:"Bs 35",free:true},
+    {n:"Heladería Dumbo",cat:"Postres · Helados",img:"assets/locales/dumbo.jpg",bg:"linear-gradient(135deg,#E85D9A,#8a2456)",r:"4.7",t:"20-30",env:"Bs 7",pr:"Bs 18",off:"2x1"}
   ];
   const grid=document.getElementById('grid');
   grid.innerHTML=locales.map(l=>`
     <article class="card">
       <div class="thumb" style="background:${l.bg}">
-        <span class="emoji">${l.e}</span>
+        <img class="thumb-img" src="${l.img}" alt="${l.n}" loading="lazy">
         ${l.off?`<span class="badge-off">${l.off}</span>`:''}
         <button class="fav" type="button" aria-label="Guardar">
           <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 1 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg>
